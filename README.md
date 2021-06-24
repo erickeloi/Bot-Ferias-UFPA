@@ -2,7 +2,7 @@
 Basicamente uma **Automação de processos** para fazer Tweets 
 sobre quantos dias faltam para as Ferias do Respectivo Periodo Letivo da UFPA
 
-## Para o programa funcionar
+## Para o programa funcionar:
 * É necessário ter o WebDriver do Chrome, 
 pode colocar na mesma pasta.
 
