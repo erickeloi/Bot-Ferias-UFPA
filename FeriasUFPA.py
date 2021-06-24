@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
 
+
 def credenciais():
     with open('account_info.txt', 'r') as arquivo:
         info = arquivo.read().split()
