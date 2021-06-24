@@ -9,7 +9,7 @@ sobre quantos dias faltam para as Ferias do Respectivo Periodo Letivo da UFPA
 pode colocar na mesma pasta.
 
 * E também colocar suas Credenciais no
-" Account_info.txt "
+" Account_info.txt ",
 basicamente:
 Seu_email **(espaço)** sua_senha
 
