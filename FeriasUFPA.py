@@ -1,134 +1,86 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-import time
+import tweepy
+from texto_do_tweet import *
+
+# Integração com o Twitter usando Tweepy:
+
+# 1. Informações da conta:
+# Favor excluir os tokens e chaves antes de enviar pro github!!!
+Consumer_Key = ''
+Consumer_Secret_Key = ''
+Access_Token = ''
+Access_Secret_Token = ''
+# Favor excluir os tokens e chaves antes de enviar pro github!!!
+
+# 2. Autenticação
+auth = tweepy.OAuthHandler(Consumer_Key, Consumer_Secret_Key)
+auth.set_access_token(Access_Token, Access_Secret_Token)
+api = tweepy.API(auth)
 
 
-def credenciais():
-    with open('account_info.txt', 'r') as arquivo:
-        info = arquivo.read().split()
-        email = info[0]
-        password = info[1]
-    return email, password
+# Criando um Log caso algo dê errado.
+def debug_text(local, error):
+    texto_do_debug = open('texto do debug.txt', 'w')
+    texto_do_debug.write(f"Deu erro no(a) {local}\n{error}\n")
+    texto_do_debug.close()
 
 
-email, password = credenciais()
-
-ano_atual = time.gmtime()[0]
-mes_atual = time.gmtime()[1]
-dia_atual = time.gmtime()[2]
-# Data no Padrão Norte-Americano, 3 horas adiantado
-
-tempo_decorrido_em_dias = (mes_atual - 1) * 30 + dia_atual
-if ano_atual == 2022:
-    tempo_decorrido_em_dias += 365
-
-fim_periodo_2_ufpa_dias = 279
-
-# Periodo 2 UFPA
-# dias corridos de 01-01-2021 até 07/10/2021 = 279
-
-# 24/06/2021 a 07/10/2021
-# 105 dia(s) = 2° Período Letivo
-
-# 7 dias de férias até o próximo período letivo ( 3° )
-# dia 286 ele volta, 14/10/2021
-
-fim_periodo_3_ufpa_dias = 403
-
-# Periodo 3 UFPA
-# dias corridos de 01-01-2021 até 08/02/2022 = 403
-
-# 14/10/2021 a 08/02/2022
-# 117 dia(s) = 3° Período Letivo
-
-# Passou de 365, pois termina em 2022.
-
-def texto_dos_bacanas():
-    periodo = 2
-
-    def texto_padrao_dias(dias_que_faltam, periodo_atual):
-        return f"Faltam {dias_que_faltam} dias para as Férias (Término do {periodo_atual}° Período Letivo)"
-
-    def texto_padrao_dia(periodo_atual):
-        return f"Falta 1 dia para as Férias ( Término do {periodo_atual}° Período Letivo)"
-
-    def texto_glorioso():
-        return "Chegou o Glorioso Dia Meus Bacanos!!!"
-
+# 3. Função que posta a mensagem do dia
+def postar_mensagem_do_dia():
+    local = "Função Postar Mensagem do Dia"
     try:
-        quantos_dias_faltam = fim_periodo_2_ufpa_dias - tempo_decorrido_em_dias
+        mensagem_do_dia = texto_dos_bacanas()
+        api.update_status(mensagem_do_dia)
 
-        if quantos_dias_faltam > 1:
-            return texto_padrao_dias(quantos_dias_faltam, periodo)
-
-        elif quantos_dias_faltam == 1:
-            return texto_padrao_dia(periodo)
-
-        elif quantos_dias_faltam == 0:
-            return texto_glorioso()
-
-        # Ele vai passar 7 dias desativado (Férias).
-
-        if tempo_decorrido_em_dias >= 286:
-            quantos_dias_faltam = fim_periodo_3_ufpa_dias - tempo_decorrido_em_dias
-            periodo = 3
-
-            if quantos_dias_faltam > 1:
-                return texto_padrao_dias(quantos_dias_faltam, periodo)
-
-            elif quantos_dias_faltam == 1:
-                return texto_padrao_dia(periodo)
-
-            elif quantos_dias_faltam == 0:
-                return texto_glorioso()
-
-    except:
-        return "Aconteceu alguma coisa !!!"
-
-# Começo da Automação
-
-# Se você não quiser que o chrome inicie em FullScreen:
-# Você pode comentar essas opções abaixo e tirar o argumento 'options=options' do driver
-# (Assim como comentar o 'Options' lá em cima na Importação)
-# Dessa forma, o chrome iniciara em modo janela
+    except Exception as error:
+        debug_text(local, error)
 
 
-options = Options()
-options.add_argument("start-maximized")
-driver = webdriver.Chrome(options=options)
+# 4. Vendo se a mensagem já foi postada!
+meus_posts_recentes = api.user_timeline()
 
-driver.get("https://twitter.com/login")
 
-# Processo de Login
+def verificacao_de_tweet_duplicado():
+    local = "Função Verificação De Tweet Duplicado"
+    isPosted = False
+    try:
+        for post in meus_posts_recentes:
+            if post.text == texto_dos_bacanas():
+                isPosted = True
+        return isPosted
 
-email_xpath = '//*[@id="react-root"]/div/div/div[2]/main/div/div/div[2]/form/div/div[1]/label/div/div[2]/div/input'
-password_xpath = '//*[@id="react-root"]/div/div/div[2]/main/div/div/div[2]/form/div/div[2]/label/div/div[2]/div/input'
-login_xpath = '//*[@id="react-root"]/div/div/div[2]/main/div/div/div[2]/form/div/div[3]/div/div/span/span'
+    except Exception as error:
+        debug_text(local, error)
 
-time.sleep(5)
 
-driver.find_element_by_xpath(email_xpath).send_keys(email)
-time.sleep(0.5)
+def enviar_mensagem_direta(nome_de_usuario: str, texto: str):
+    local = "Função Enviar_Mensagem_Direta"
+    try:
+        id_no_twitter = api.get_user(f"@{nome_de_usuario}").id
+        api.send_direct_message(str(id_no_twitter), texto)
 
-driver.find_element_by_xpath(password_xpath).send_keys(password)
-time.sleep(1)
+    except Exception as error:
+        debug_text(local, error)
 
-driver.find_element_by_xpath(login_xpath).click()
-time.sleep(0.5)
 
-# Processo de Envio da Mensagem
+def main():
+    local = "Função Main"
+    try:
+        if verificacao_de_tweet_duplicado():
+            texto_da_mensagem = open('texto da mensagem.txt', 'w')
+            texto_da_mensagem.write(f"O tweet de hoje já foi postado anteriormente, Não esquente sua cabeça!\nA "
+                                    f"Mensagem do dia é {texto_da_mensagem}\n")
+            texto_da_mensagem.close()
 
-twitter_post_xpath = '//*[@id="react-root"]/div/div/div[2]/header/div/div/div/div[1]/div[3]/a/div/span/div/div/span/span'
-twitter_post_message = '//*[@id="layers"]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div[3]/div/div/div/div[1]/div/div/div/div/div[2]/div[1]/div/div/div/div/div/div/div/div/label/div[1]/div/div/div/div/div[2]/div/div/div/div'
-twitter_send_post_xpath = '//*[@id="layers"]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div[3]/div/div/div/div[1]/div/div/div/div/div[2]/div[3]/div/div/div[2]/div[4]/div/span/span'
+        elif not verificacao_de_tweet_duplicado():
+            postar_mensagem_do_dia()
 
-time.sleep(5)
+            texto_da_mensagem = open('texto da mensagem.txt', 'w')
+            texto_da_mensagem.write(f"Mermão, tudo NO ESQUEMA!!! O de hoje foi pago agora!!!\n"
+                                    f"A mensagem do dia é {texto_da_mensagem}\n")
+            texto_da_mensagem.close()
 
-driver.find_element_by_xpath(twitter_post_xpath).click()
-time.sleep(3)
+    except Exception as error:
+        debug_text(local, error)
 
-driver.find_element_by_xpath(twitter_post_message).send_keys(texto_dos_bacanas())
-time.sleep(2)
 
-driver.find_element_by_xpath(twitter_send_post_xpath).click()
-time.sleep(1)
+main()
