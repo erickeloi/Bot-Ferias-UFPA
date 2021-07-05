@@ -1,16 +1,13 @@
-# Bot Ferias UFPA
-Basicamente uma **Automação de processos** para fazer Tweets 
-sobre quantos dias faltam para as Ferias do Respectivo Periodo Letivo da UFPA
+# Bot Ferias UFPA V2
+> Automatização de Tweets usando python e a Bliblioteca Tweepy
 
-## Para o programa funcionar:
-* Ter o Python e o Selenium Instalados
+## O que o "Bot Ferias UFPA" Faz?
+### Ele diariamente posta no twitter quantos dias faltam para as férias do Período Letivo ⛱️.
 
-* Baixar o WebDriver do Chrome, 
-pode colocar na mesma pasta.
+## Atualmente na Conta @FeriasUfpa
+![feriasufpatweet](https://user-images.githubusercontent.com/65841249/124410555-20ddd400-dd21-11eb-9138-cc4a5dc54290.png)
 
-* E também colocar suas Credenciais no
-" Account_info.txt ",
-basicamente:
-Seu_email **(espaço)** sua_senha
-
-
+## Para o programa funcionar em outra conta é necessário:
+* Uma conta de Desenvolvedor do Twitter (Twitter Developer Account)
+* Chaves e Tokens do Aplicativo/Conta de Desenvolvedor.
+* Python e a Bliblioteca Tweepy
