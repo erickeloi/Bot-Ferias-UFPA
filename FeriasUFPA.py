@@ -1,15 +1,17 @@
+import os
 import tweepy
 from texto_do_tweet import *
+
 
 # Integração com o Twitter usando Tweepy:
 
 # 1. Informações da conta:
-# Favor excluir os tokens e chaves antes de enviar pro github!!!
-Consumer_Key = ''
-Consumer_Secret_Key = ''
-Access_Token = ''
-Access_Secret_Token = ''
-# Favor excluir os tokens e chaves antes de enviar pro github!!!
+# Favor Adicione os tokens e chaves como variaveis do ambiente!!!
+# Isso pode ser feito usando o comado export no linux e setx no windows
+Consumer_Key = os.environ["CONSUMER_KEY"]
+Consumer_Secret_Key = os.environ["CONSUMER_SECRET_KEY"]
+Access_Token = os.environ["ACCESS_TOKEN"]
+Access_Secret_Token = os.environ["ACCESS_SECRET_TOKEN"]
 
 # 2. Autenticação
 auth = tweepy.OAuthHandler(Consumer_Key, Consumer_Secret_Key)
