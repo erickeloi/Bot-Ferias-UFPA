@@ -64,6 +64,9 @@ def texto_dos_bacanas():
         # E voltar 14/10/2021, começo do 3° Periodo Letivo
 
         if tempo_decorrido_em_dias >= 286:
+            # Correção para corrigir margem de erro das postagens
+            tempo_decorrido_em_dias += 2
+            #
             quantos_dias_faltam = fim_periodo_3_ufpa_dias - tempo_decorrido_em_dias
             periodo = 3
 
