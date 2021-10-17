@@ -10,7 +10,7 @@ if 0 <= gmtime().tm_hour <= 2:
     dia_atual -= 1
 
 # Lógica da Mensagem:
-tempo_decorrido_em_dias = (mes_atual - 1) * 30 + dia_atual
+tempo_decorrido_em_dias = ((mes_atual - 1) * 30 + dia_atual) + 2
 if ano_atual == 2022:
     tempo_decorrido_em_dias += 365
 
@@ -64,9 +64,7 @@ def texto_dos_bacanas():
         # E voltar 14/10/2021, começo do 3° Periodo Letivo
 
         if tempo_decorrido_em_dias >= 286:
-            # Correção para corrigir margem de erro das postagens
-            tempo_decorrido_em_dias += 2
-            #
+            
             quantos_dias_faltam = fim_periodo_3_ufpa_dias - tempo_decorrido_em_dias
             periodo = 3
 
@@ -80,7 +78,8 @@ def texto_dos_bacanas():
                 return texto_glorioso()
 
     except Exception as error:
-        texto_do_debug = open('texto do debug.txt', 'w')
-        texto_do_debug.write(f"Deu erro na Mensagem dos bacanas!!!\n{error}\n")
-        texto_do_debug.close()
+        print("Deu erro\n", error)
         return "Deu Erro na Mensagem dos bacanas!!! Chame o Erick Herói Imediatamente!!!"
+        
+    
+print(texto_dos_bacanas())
