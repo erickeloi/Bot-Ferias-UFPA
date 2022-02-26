@@ -1,7 +1,7 @@
 # Bot Ferias UFPA V2
-## Automatização de Tweets usando Python e a Bliblioteca Tweepy
+### Automatização de Tweets usando Python e a Bliblioteca Tweepy
 
-## O que o "Bot Ferias UFPA" Faz?
+# O que o "Bot Ferias UFPA" Faz?
 ### Ele diariamente posta no twitter quantos dias faltam para as férias da UFPA ⛱️.
 
 ## Atualmente na Conta @FeriasUfpa
