@@ -88,7 +88,7 @@ def texto_do_tweet():
         if dias_faltando_fim_pl20221 > 1:
             texto_final += texto_padrao_dias(dias_faltando_fim_pl20221, periodo_letivo)
         elif dias_faltando_fim_pl20221 == 1:
-            texto_final += texto_padrao_dia(dias_faltando_fim_pl20221)
+            texto_final += texto_padrao_dia(periodo_letivo)
         elif dias_faltando_fim_pl20221 == 0:
             texto_final += texto_glorioso(periodo_letivo)
 
@@ -98,7 +98,7 @@ def texto_do_tweet():
         if dias_faltando_fim_pl20222 > 1:
             texto_final += texto_padrao_dias(dias_faltando_fim_pl20222, periodo_letivo)
         elif dias_faltando_fim_pl20222 == 1:
-            texto_final += texto_padrao_dia(dias_faltando_fim_pl20222)
+            texto_final += texto_padrao_dia(periodo_letivo)
         elif dias_faltando_fim_pl20222 == 0:
             texto_final += texto_glorioso(periodo_letivo)
 
@@ -108,7 +108,7 @@ def texto_do_tweet():
         if dias_faltando_fim_pl20223 > 1:
             texto_final += texto_padrao_dias(dias_faltando_fim_pl20223, periodo_letivo)
         elif dias_faltando_fim_pl20223 == 1:
-            texto_final += texto_padrao_dia(dias_faltando_fim_pl20223)
+            texto_final += texto_padrao_dia(periodo_letivo)
         elif dias_faltando_fim_pl20223 == 0:
             texto_final += texto_glorioso(periodo_letivo)
 
@@ -118,7 +118,7 @@ def texto_do_tweet():
         if dias_faltando_fim_pl20224 > 1:
             texto_final += texto_padrao_dias(dias_faltando_fim_pl20224, periodo_letivo)
         elif dias_faltando_fim_pl20224 == 1:
-            texto_final += texto_padrao_dia(dias_faltando_fim_pl20224)
+            texto_final += texto_padrao_dia(periodo_letivo)
         elif dias_faltando_fim_pl20224 == 0:
             texto_final += texto_glorioso(periodo_letivo)
 
