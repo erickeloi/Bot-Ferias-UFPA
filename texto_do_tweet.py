@@ -123,5 +123,3 @@ def texto_do_tweet():
             texto_final += texto_glorioso(periodo_letivo)
 
     return texto_final
-
-print(texto_do_tweet())
