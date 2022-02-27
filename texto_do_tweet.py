@@ -1,6 +1,7 @@
 from datetime import date
 
 data_atual = date.today()
+
 ano_atual = data_atual.year
 mes_atual = data_atual.month
 dia_atual = data_atual.day
@@ -22,6 +23,7 @@ dias_faltando_fim_pl20221 = dias_faltando_fim_pl20221_aux.days
 # Dias corridos = 56 dias
 # Dias letivos = 49 dias ( Sábado também conta )
 
+# Periodos Letivos - INTENSIVOS
 # 2022.3
 # 2022-07-01 ( inicio do 2022.3 - INTENSIVO )
 # 2022-08-31 ( fim do 2022.3 - INTENSIVO )
@@ -63,16 +65,13 @@ fim_pl20224 = date(2022, 12, 21)
 dias_faltando_fim_pl20224_aux = fim_pl20224 - data_atual
 
 dias_faltando_fim_pl20224 = dias_faltando_fim_pl20224_aux.days
-
-
 # -------------------------------------------------
 
 # Lógica da Mensagem:
 
 
 def texto_do_tweet():
-    periodo_letivo = str()
-    texto_final = ''
+    texto_final = str()
 
     def texto_padrao_dias(dias_que_faltam, periodo_atual):
         return f"Faltam {dias_que_faltam} dias para as Férias (Término do P.L. {periodo_atual})\n"
@@ -91,7 +90,7 @@ def texto_do_tweet():
         elif dias_faltando_fim_pl20221 == 1:
             texto_final += texto_padrao_dia(dias_faltando_fim_pl20221)
         elif dias_faltando_fim_pl20221 == 0:
-            texto_glorioso(periodo_letivo)
+            texto_final += texto_glorioso(periodo_letivo)
 
     elif ano_atual == 2022 and 3 <= mes_atual <= 7:
         periodo_letivo = '2022.2 - EXTENSIVO'
@@ -101,7 +100,7 @@ def texto_do_tweet():
         elif dias_faltando_fim_pl20222 == 1:
             texto_final += texto_padrao_dia(dias_faltando_fim_pl20222)
         elif dias_faltando_fim_pl20222 == 0:
-            texto_glorioso(periodo_letivo)
+            texto_final += texto_glorioso(periodo_letivo)
 
     if ano_atual == 2022 and 7 <= mes_atual <= 8:
         periodo_letivo = '2022.3 - INTENSIVO'
@@ -111,7 +110,7 @@ def texto_do_tweet():
         elif dias_faltando_fim_pl20223 == 1:
             texto_final += texto_padrao_dia(dias_faltando_fim_pl20223)
         elif dias_faltando_fim_pl20223 == 0:
-            texto_glorioso(periodo_letivo)
+            texto_final += texto_glorioso(periodo_letivo)
 
     if ano_atual == 2022 and 8 <= mes_atual <= 12:
         periodo_letivo = '2022.4 - EXTENSIVO'
@@ -121,7 +120,8 @@ def texto_do_tweet():
         elif dias_faltando_fim_pl20224 == 1:
             texto_final += texto_padrao_dia(dias_faltando_fim_pl20224)
         elif dias_faltando_fim_pl20224 == 0:
-            texto_glorioso(periodo_letivo)
+            texto_final += texto_glorioso(periodo_letivo)
 
     return texto_final
 
+print(texto_do_tweet())
