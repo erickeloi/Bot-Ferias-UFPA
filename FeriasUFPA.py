@@ -44,11 +44,13 @@ def enviar_mensagem_direta(nome_de_usuario: str, texto: str):
     id_no_twitter = api.get_user(f"@{nome_de_usuario}").id
     api.send_direct_message(str(id_no_twitter), texto)
 
+
 # 6. Função Principal
 def main():
-    if not verificacao_de_tweet_duplicado():
+    if mensagem_do_dia and not verificacao_de_tweet_duplicado():
         postar_mensagem_do_dia()
 
 
 if __name__ == "__main__":
     main()
+    
