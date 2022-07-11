@@ -44,7 +44,7 @@ dias_faltando_fim_pl20223 = dias_faltando_fim_pl20223_aux.days
 # 119 dias corridos
 # 100 dias letivos
 
-fim_pl20222 = date(2022, 7, 11)
+fim_pl20222 = date(2022, 7, 28)
 
 dias_faltando_fim_pl20222_aux = fim_pl20222 - data_atual
 
