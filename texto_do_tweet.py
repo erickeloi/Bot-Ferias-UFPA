@@ -88,7 +88,7 @@ def texto_do_tweet():
         if dias_que_faltam > 1:
             texto_final_aux += texto_padrao_dias(dias_que_faltam, periodo_atual)
         elif dias_que_faltam == 1:
-            texto_final_aux += texto_padrao_dia(dias_que_faltam)
+            texto_final_aux += texto_padrao_dia(periodo_atual)
         elif dias_que_faltam == 0:
             texto_final_aux += texto_glorioso(periodo_atual)
         return texto_final_aux
